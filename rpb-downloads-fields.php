@@ -225,7 +225,7 @@ class RBP_Downloads_Fields {
     }
     
     /**
-     * Error Message if dependencies aren't meta_is_product_attribute()
+     * Error Message if dependencies aren't met
      * 
      * @access      public
      * @since       0.1.0

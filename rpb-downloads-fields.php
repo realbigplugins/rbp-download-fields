@@ -143,6 +143,14 @@ class RBP_Downloads_Fields {
     public function testimonial_meta_box() {
     
         rbm_do_field_repeater( 'testimonials', false, array(
+            'name' => array(
+                'type' => 'text',
+                'label' => __( 'Name', RBP_Downloads_Fields::$plugin_id ),
+            ),
+            'company' => array(
+                'type' => 'text',
+                'label' => __( 'Company', RBP_Downloads_Fields::$plugin_id ),
+            ),
             'gravatar_email' => array(
                 'type' => 'text',
                 'label' => __( 'Gravatar E-mail', RBP_Downloads_Fields::$plugin_id ),

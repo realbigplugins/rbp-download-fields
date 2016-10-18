@@ -131,6 +131,15 @@ class RBP_Downloads_Fields {
             'high' // Priority
         );
         
+        add_meta_box(
+            RBP_Downloads_Fields::$plugin_id . '_banner_colors', // Metabox ID
+            sprintf( __( '%1$s Banner Colors', 'easy-digital-downloads' ), edd_get_label_singular(), edd_get_label_plural() ), // Metabox Label
+            array( $this, 'banner_colors' ), // Callback function to populate Meta Box
+            'download',
+            'side', // Position
+            'default' // Priority
+        );
+        
     }
     
     /**
@@ -230,6 +239,20 @@ class RBP_Downloads_Fields {
             ),
         ) );
 
+    }
+    
+    public function banner_colors() {
+        
+        rbm_do_field_colorpicker( 'primary_color', _x( 'Primary Color', 'Primary Color Label', RBP_Downloads_Fields::$plugin_id ), false, array(
+            'description' => _x( 'Should match the background color of the Download Image', 'Primary Color Description', RBP_Downloads_Fields::$plugin_id ),
+            'default' => '#12538f',
+        ) );
+        
+        rbm_do_field_colorpicker( 'secondary_color', _x( 'Secondary Color', 'Secondary Color Label', RBP_Downloads_Fields::$plugin_id ), false, array(
+            'description' => _x( 'Accent Color used for Borders and Drop Shadows', 'Secondary Color Description', RBP_Downloads_Fields::$plugin_id ),
+            'default' => '#51a0e9',
+        ) );
+        
     }
     
     /**

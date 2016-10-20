@@ -188,7 +188,7 @@ class RBP_Downloads_Fields {
         rbm_do_field_repeater( 'features', false, array(
             'image' => array(
                 'type' => 'image',
-                'label' => __( 'Image', RBP_Downloads_Fields::$plugin_id ),
+                'label' => __( 'Image - Recommended Size: 1000px * 750px', RBP_Downloads_Fields::$plugin_id ),
                 false,
                 array(
                     'preview' => 'thumbnail',

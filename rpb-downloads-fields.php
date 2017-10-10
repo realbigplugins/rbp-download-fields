@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RBP Downloads Fields
  * Description: Adds Additional Metaboxes for EDD's "Downloads" Post Type
- * Version: 0.1.0
+ * Version: 0.2.0
  * Author: Eric Defore
  * Author URI: http://realbigmarketing.com
  * Text Domain: rbp-downloads-fields

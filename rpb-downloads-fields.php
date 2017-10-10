@@ -72,6 +72,11 @@ class RBP_Downloads_Fields {
      * @return      void
      */
     public function setup_constants() {
+		
+		// WP Loads things so weird. I really want this function.
+		if ( ! function_exists( 'get_plugin_data' ) ) {
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+		}
         
         $plugin_data = get_plugin_data( __FILE__ );
         

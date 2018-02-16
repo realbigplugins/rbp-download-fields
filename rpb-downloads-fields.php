@@ -19,12 +19,6 @@ class RBP_Downloads_Fields {
      * @since       0.1.0
      */
     private static $instance;
-    
-    /**
-     * @var         Used for Localization
-     * @since       0.1.0
-     */
-    public static $plugin_id = 'rbp-downloads-fields';
 
     private function __clone() {}
 
@@ -101,7 +95,7 @@ class RBP_Downloads_Fields {
     public function add_meta_boxes() {
         
         add_meta_box(
-            RBP_Downloads_Fields::$plugin_id . '_testimonials_meta_box', // Metabox ID
+            'rbp-downloads-fields' . '_testimonials_meta_box', // Metabox ID
             sprintf( __( '%1$s Testimonials', 'easy-digital-downloads' ), edd_get_label_singular(), edd_get_label_plural() ), // Metabox Label
             array( $this, 'testimonial_meta_box' ), // Callback function to populate Meta Box
             'download',
@@ -110,7 +104,7 @@ class RBP_Downloads_Fields {
         );
 
         add_meta_box(
-            RBP_Downloads_Fields::$plugin_id . '_features_meta_box', // Metabox ID
+            'rbp-downloads-fields' . '_features_meta_box', // Metabox ID
             sprintf( __( '%1$s Features', 'easy-digital-downloads' ), edd_get_label_singular(), edd_get_label_plural() ), // Metabox Label
             array( $this, 'features_meta_box' ), // Callback function to populate Meta Box
             'download',
@@ -119,7 +113,7 @@ class RBP_Downloads_Fields {
         );
 
         add_meta_box(
-            RBP_Downloads_Fields::$plugin_id . '_video_meta_box', // Metabox ID
+            'rbp-downloads-fields' . '_video_meta_box', // Metabox ID
             sprintf( __( '%1$s Video', 'easy-digital-downloads' ), edd_get_label_singular(), edd_get_label_plural() ), // Metabox Label
             array( $this, 'video_meta_box' ), // Callback function to populate Meta Box
             'download',
@@ -128,7 +122,7 @@ class RBP_Downloads_Fields {
         );
 
         add_meta_box(
-            RBP_Downloads_Fields::$plugin_id . '_requires_meta_box', // Metabox ID
+            'rbp-downloads-fields' . '_requires_meta_box', // Metabox ID
             sprintf( __( '%1$s Requirements', 'easy-digital-downloads' ), edd_get_label_singular(), edd_get_label_plural() ), // Metabox Label
             array( $this, 'requires_meta_box' ), // Callback function to populate Meta Box
             'download',
@@ -137,7 +131,7 @@ class RBP_Downloads_Fields {
         );
         
         add_meta_box(
-            RBP_Downloads_Fields::$plugin_id . '_banner_colors', // Metabox ID
+            'rbp-downloads-fields' . '_banner_colors', // Metabox ID
             sprintf( __( '%1$s Banner Colors', 'easy-digital-downloads' ), edd_get_label_singular(), edd_get_label_plural() ), // Metabox Label
             array( $this, 'banner_colors' ), // Callback function to populate Meta Box
             'download',
@@ -156,28 +150,46 @@ class RBP_Downloads_Fields {
      */
     public function testimonial_meta_box() {
     
-        rbm_do_field_repeater( 'testimonials', false, array(
-            'name' => array(
-                'type' => 'text',
-                'label' => __( 'Name', RBP_Downloads_Fields::$plugin_id ),
-            ),
-            'company' => array(
-                'type' => 'text',
-                'label' => __( 'Company', RBP_Downloads_Fields::$plugin_id ),
-            ),
-            'gravatar_email' => array(
-                'type' => 'text',
-                'label' => __( 'Gravatar E-mail', RBP_Downloads_Fields::$plugin_id ),
-            ),
-            'content' => array( 
-                'type' => 'wysiwyg',
-                'label' => __( 'Content', RBP_Downloads_Fields::$plugin_id ),
-                'wysiwyg_args' => array(
-                    'tinymce' => true,
-                    'quicktags' => true,
-                ),
-            ),
+        rbm_fh_do_field_repeater( array(
+			'name' => 'testimonials', 
+			'group' => 'downloads_testimonials',
+			'fields' => array(
+				'name' => array(
+					'type' => 'text',
+					'args' => array(
+						'label' => __( 'Name', 'rbp-downloads-fields' ),
+						'input_class' => 'regular-text',
+					),
+				),
+				'company' => array(
+					'type' => 'text',
+					'args' => array(
+						'label' => __( 'Company', 'rbp-downloads-fields' ),
+						'input_class' => 'regular-text',
+					),
+				),
+				'gravatar_email' => array(
+					'type' => 'text',
+					'args' => array(
+						'label' => __( 'Gravatar E-mail', 'rbp-downloads-fields' ),
+						'input_class' => 'regular-text',
+					),
+				),
+				'content' => array( 
+					'type' => 'textarea',
+					'args' => array(
+						'label' => __( 'Content', 'rbp-downloads-fields' ),
+						'wysiwyg' => true,
+						'wysiwyg_args' => array(
+							'tinymce' => true,
+							'quicktags' => true,
+						),
+					),
+				),
+			),
         ) );
+		
+		rbm_fh_init_field_group( 'downloads_testimonials' );
         
     }
     
@@ -190,28 +202,39 @@ class RBP_Downloads_Fields {
      */
     public function features_meta_box() {
 
-        rbm_do_field_repeater( 'features', false, array(
-            'image' => array(
-                'type' => 'image',
-                'label' => __( 'Image - Recommended Size: 1000px * 750px', RBP_Downloads_Fields::$plugin_id ),
-                false,
-                array(
-                    'preview' => 'thumbnail',
-                )
-            ),
-            'title' => array( 
-                'type' => 'text',
-                'label' => __( 'Title', RBP_Downloads_Fields::$plugin_id ),
-            ),
-            'content' => array( 
-                'type' => 'wysiwyg',
-                'label' => __( 'Content', RBP_Downloads_Fields::$plugin_id ),
-                'wysiwyg_args' => array(
-                    'tinymce' => true,
-                    'quicktags' => true,
-                ),
-            ),
+        rbm_fh_do_field_repeater( array(
+			'name' => 'features', 
+			'group' => 'downloads_features',
+			'fields' => array(
+				'image' => array(
+					'type' => 'media',
+					'args' => array(
+						'label' => __( 'Image - Recommended Size: 1000px * 750px', 'rbp-downloads-fields' ),
+						'preview' => 'thumbnail',
+					),
+				),
+				'title' => array( 
+					'type' => 'text',
+					'args' => array(
+						'label' => __( 'Title', 'rbp-downloads-fields' ),
+						'input_class' => 'regular-text',
+					),
+				),
+				'content' => array( 
+					'type' => 'textarea',
+					'args' => array(
+						'label' => __( 'Content', 'rbp-downloads-fields' ),
+						'wysiwyg' => true,
+						'wysiwyg_args' => array(
+							'tinymce' => true,
+							'quicktags' => true,
+						),
+					),
+				),
+			),
         ) );
+		
+		rbm_fh_init_field_group( 'downloads_features' );
 
     }
     
@@ -224,7 +247,14 @@ class RBP_Downloads_Fields {
      */
     public function video_meta_box() {
 
-        rbm_do_field_text( 'video', 'Video URL' );
+        rbm_fh_do_field_text( array(
+			'name' => 'video', 
+			'group' => 'downloads_video',
+			'label' => 'Video URL',
+			'input_class' => 'regular-text',
+		) );
+		
+		rbm_fh_init_field_group( 'downloads_video' );
 
     }
     
@@ -237,26 +267,43 @@ class RBP_Downloads_Fields {
      */
     public function requires_meta_box() {
 
-        rbm_do_field_repeater( 'requirements', false, array(
-            'requirement' => array(
-                'type' => 'text',
-                'label' => __( 'Requirement', RBP_Downloads_Fields::$plugin_id ),
-            ),
+        rbm_fh_do_field_repeater( array(
+			'name' => 'requirements',
+			'group' => 'downloads_requires',
+			'fields' => array(
+				'requirement' => array(
+					'type' => 'text',
+					'args' => array(
+						'label' => __( 'Requirement', 'rbp-downloads-fields' ),
+						'input_class' => 'regular-text',
+					),
+				),
+			),
         ) );
+		
+		rbm_fh_init_field_group( 'downloads_requires' );
 
     }
     
     public function banner_colors() {
         
-        rbm_do_field_colorpicker( 'primary_color', _x( 'Primary Color', 'Primary Color Label', RBP_Downloads_Fields::$plugin_id ), false, array(
-            'description' => _x( 'Should match the background color of the Download Image', 'Primary Color Description', RBP_Downloads_Fields::$plugin_id ),
-            'default' => '#12538f',
+        rbm_fh_do_field_colorpicker( array(
+			'name' => 'primary_color', 
+			'group' => 'downloads_colors',
+			'label' => _x( 'Primary Color', 'Primary Color Label', 'rbp-downloads-fields' ),
+			'description' => _x( 'Should match the background color of the Download Image', 'Primary Color Description', 'rbp-downloads-fields' ),
+			'default' => '#12538f',
         ) );
         
-        rbm_do_field_colorpicker( 'secondary_color', _x( 'Secondary Color', 'Secondary Color Label', RBP_Downloads_Fields::$plugin_id ), false, array(
-            'description' => _x( 'Accent Color used for Borders and Drop Shadows', 'Secondary Color Description', RBP_Downloads_Fields::$plugin_id ),
-            'default' => '#51a0e9',
+        rbm_fh_do_field_colorpicker( array(
+			'name' => 'secondary_color', 
+			'group' => 'downloads_colors',
+			'label' => _x( 'Secondary Color', 'Secondary Color Label', 'rbp-downloads-fields' ),
+			'description' => _x( 'Accent Color used for Borders and Drop Shadows', 'Secondary Color Description', 'rbp-downloads-fields' ),
+			'default' => '#51a0e9',
         ) );
+		
+		rbm_fh_init_field_group( 'downloads_colors' );
         
     }
     
@@ -271,7 +318,7 @@ class RBP_Downloads_Fields {
 
         <div class="notice notice-error">
             <p>
-                <?php printf( __( 'To use the %s Plugin, both %s and %s must be active as either a Plugin or a Must Use Plugin!', RBP_Downloads_Fields::$plugin_id ), '<strong>RBP Downloads Fields</strong>', '<a href="//github.com/realbig/rbm-field-helpers/" target="_blank">RBM Field Helpers</a>', '<a href="//wordpress.org/plugins/easy-digital-downloads/" target="_blank">Easy Digital Downloads</a>' ); ?>
+                <?php printf( __( 'To use the %s Plugin, both %s and %s must be active as either a Plugin or a Must Use Plugin!', 'rbp-downloads-fields' ), '<strong>RBP Downloads Fields</strong>', '<a href="//github.com/realbig/rbm-field-helpers/" target="_blank">RBM Field Helpers</a>', '<a href="//wordpress.org/plugins/easy-digital-downloads/" target="_blank">Easy Digital Downloads</a>' ); ?>
             </p>
         </div>
         

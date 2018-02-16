@@ -2,10 +2,12 @@
 /**
  * Plugin Name: RBP Downloads Fields
  * Description: Adds Additional Metaboxes for EDD's "Downloads" Post Type
- * Version: 0.2.0
+ * Version: 1.1.0
  * Author: Eric Defore
  * Author URI: http://realbigmarketing.com
  * Text Domain: rbp-downloads-fields
+ * GitHub Plugin URI: realbigplugins/rbp-download-fields
+ * GitHub Branch: master
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

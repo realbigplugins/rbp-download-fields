@@ -95,6 +95,15 @@ class RBP_Downloads_Fields {
      * @return      void
      */
     public function add_meta_boxes() {
+
+        add_meta_box(
+            'rbp-downloads-fields' . '_alternate_title_meta_box', // Metabox ID
+            sprintf( __( '%1$s Alternate Title', 'easy-digital-downloads' ), edd_get_label_singular(), edd_get_label_plural() ), // Metabox Label
+            array( $this, 'alternate_title_meta_box' ), // Callback function to populate Meta Box
+            'download',
+            'normal', // Position
+            'high' // Priority
+        );
         
         add_meta_box(
             'rbp-downloads-fields' . '_testimonials_meta_box', // Metabox ID
@@ -141,6 +150,26 @@ class RBP_Downloads_Fields {
             'default' // Priority
         );
         
+    }
+
+    /**
+     * Metabox callback for Download Alternate Title
+     *
+     * @access  public
+     * @since   {{VERSION}}
+     * @return  void
+     */
+    public function alternate_title_meta_box() {
+
+        rbm_fh_do_field_text( array(
+            'name' => 'alternate_title',
+            'group' => 'downloads_alternate_title',
+            'label' => __( 'Alternate Title', 'rbp-downloads-fields' ),
+            'description' => __( 'This will override the shown Download Title at the top of the page', 'rbp-downloads-fields' ),
+        ) );
+
+        rbm_fh_init_field_group( 'downloads_alternate_title' );
+
     }
     
     /**
